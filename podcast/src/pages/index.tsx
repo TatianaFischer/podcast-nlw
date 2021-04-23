@@ -1,12 +1,15 @@
 // import { useEffect } from "react"
 import { GetStaticProps } from 'next';
+import Image from 'next/image';
 import { format, parseISO} from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { api } from '../services/api';
 import { convertDurationTotimeString } from '../utils/convertDurationTotimeString';
 
-type Episodes= {
-  episodes: Array<{
+import styles from './home.module.scss';
+
+type Episode= {
+  
     id: string;
     title: string;
     thumbnail: string;
@@ -15,22 +18,54 @@ type Episodes= {
     durantionAsString: string;
     url: string;
     members: string;
-    published_at: string;
-  }>
+    publishedAt: string;
+ 
 }
 
 type HomeProps = {
-  episodes: Episodes[];
+  latestEpisodes: Episode[];
+  allEpisodes: Episode[];
 }
 
 
-export default function Home(props: HomeProps) {
+export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
   
   return (
-    <>
-   <h1>Index</h1>
-   <h1>{JSON.stringify(props.episodes)}</h1>
-   </>
+    <div className={styles.homepage}>
+    <section className={styles.layesEpisodes}>
+      <h2> Últimos lançamentos</h2>
+      <ul>
+        {latestEpisodes.map(episode => {
+
+          return (
+            <li key={episode.id}>
+              <Image 
+                width={192} 
+                height={192} 
+                src={episode.thumbnail} 
+                alt={episode.title} 
+                objectFit="cover"
+              />
+
+              <div className={styles.episodesDetails}>
+                <a href="">{episode.title}</a>
+                <p>{episode.members}</p>
+                <span>{episode.publishedAt}</span>
+                <span>{episode.durantionAsString}</span>
+              </div>
+              <button type="button">
+              <img src='/play-green.svg' alt='Tocar episódio'/>
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+    
+    </section>
+      <section className={styles.allEpisodes}>
+    
+    </section>
+   </div>
   
   )
 }
@@ -74,11 +109,15 @@ export default function Home(props: HomeProps) {
           url: episode.file.url,
         }
       })
+
+      const latestEpisodes = episodes.slice(0,2);
+      const allEpisodes = episodes.slice(2, episodes.length);
       
       
       return {
         props: {
-          episodes,
+          latestEpisodes,
+          allEpisodes,
         },
         revalidate: 60 * 60 * 8,
       }
