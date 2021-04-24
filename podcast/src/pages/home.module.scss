@@ -12,7 +12,9 @@
   }
 
 
-  .latestEpisodes {
+ 
+}
+ .latestEpisodes {
     ul {
       list-style: none;
       display: grid;
@@ -61,7 +63,7 @@
         }
 
         p {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           margin-top: 0.5rem;
           max-width: 70%;
           // white-space: nowrap; //para nunca quebrar de linha
@@ -72,7 +74,7 @@
         span {
           display: inline-block;
           margin-top: 0.5rem;
-          font-size: 0.8rem;
+          font-size: 0.7rem;
 
           &:last-child {
             margin-left: 0.5rem;
@@ -115,6 +117,70 @@
           img {
             width: 1.5rem;
             height: 1.5rem;
+          }
+
+          &:hover {
+            filter: brightness(0.95);
+          }
+      }
+    }
+  }
+
+.allEpisodes {
+  padding-bottom: 2rem;
+  font-size: 0.7rem;
+
+  table {
+    width: 100%;
+
+    th, td {
+      padding: 0.7rem 0.5rem;
+      border-radius: 1px solid var(--gray-100);
+    }
+
+    th {
+      color: var(--gray-200);
+      text-transform: uppercase;
+      font: 500 0.7rem Lexend, sans-serif;
+      text-align: left;
+    }
+
+    td {
+      font-size: 0.7rem;
+      
+      img {
+        width: 3rem;
+          height: 2.5rem;
+        border-radius: 0.3rem;
+      }
+
+      a {
+        color: var(--gray-800);
+        font-family: Lexend, sans-serif;
+        font-weight: 600;
+        text-decoration: none;
+        line-height: 1.2rem;
+        
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      button {
+        
+          width: 1.5rem;
+          height: 1.5rem;
+          background:  var(--white);
+          border: 1px solid var(--gray-100);
+          border-radius: 0.25rem;
+          font-size: 0;
+
+          transition: filter 0.2s;
+
+          img {
+            width: 1rem;
+            height: 1rem;
           }
 
           &:hover {
